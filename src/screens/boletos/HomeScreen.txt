@@ -1,0 +1,72 @@
+// src/screens/home/HomeScreen.js
+
+
+import React from 'react';
+import { View, Text, StyleSheet, Button, Image, Alert, TouchableOpacity } from 'react-native';
+import { globalStyles } from '../../styles/globalStyles';
+
+const HomeScreen = ({ setIsLoggedIn, navigation }) => {
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
+
+  const handleStartRoute = () => {
+    navigation.navigate('RouteScreen');
+  };
+
+  const handleGoMap = () => {
+    navigation.navigate('MapRouteScreen');
+  };
+
+  const handleGoProfile = () => {
+    navigation.navigate('Profile');
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.name}>Juan Perez</Text>
+        <Image source={require('../../../assets/images/chofer.jpg')} style={styles.avatar} />
+      </View>
+
+      <View style={styles.weather}>
+        <Text style={styles.tempBox}>25.5°C{'\n'}Temperature</Text>
+        <Text style={styles.humBox}>35%{'\n'}Humidity</Text>
+      </View>
+
+      <Text style={styles.tickets}>Boletos Vendidos : 12 / 300</Text>
+
+      <Button title="Vender Boleto" onPress={() => {}} />
+      <Button title="Cancelar Boleto" onPress={() => {}} />
+
+      <Text style={styles.payment}>Pago : Efectivo</Text>
+
+      {/* Botones adicionales (tuyos originales) */}
+      <TouchableOpacity style={globalStyles.button} onPress={handleStartRoute}>
+        <Text style={globalStyles.buttonText}>Iniciar Ruta</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={globalStyles.button} onPress={handleGoProfile}>
+        <Text style={globalStyles.buttonText}>Perfil</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={[globalStyles.button, { backgroundColor: '#f44336' }]} onPress={handleLogout}>
+        <Text style={globalStyles.buttonText}>Cerrar sesión</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+export default HomeScreen;
+
+const styles = StyleSheet.create({
+  container: { flex: 1, padding: 20, backgroundColor: '#fff' },
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  name: { fontSize: 24, fontWeight: 'bold' },
+  avatar: { width: 50, height: 50, borderRadius: 25 },
+  weather: { flexDirection: 'row', justifyContent: 'space-around', marginVertical: 20 },
+  tempBox: { backgroundColor: '#FFA07A', padding: 10, borderRadius: 8, textAlign: 'center' },
+  humBox: { backgroundColor: '#87CEFA', padding: 10, borderRadius: 8, textAlign: 'center' },
+  tickets: { textAlign: 'center', marginVertical: 10 },
+  payment: { textAlign: 'center', marginTop: 20 },
+});
